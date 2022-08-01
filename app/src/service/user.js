@@ -61,3 +61,5 @@ SERVICES.isUserTaken = async (req, res) => {
 
     res.status(200).json(false);
 }
+
+module.exports = SERVICES;
