@@ -1,6 +1,6 @@
 const User = require("./user");
 const Role = require("./role");
-const db = require("../configs/database");
+const db = require("../config/database");
 const Sequelize = require("sequelize");
 
 const UserRoles = db.define("tb_user_role", {

@@ -1,40 +1,51 @@
 const DAO = require('../dao/vehicleData');
 
-const SERVICES = {};
+const SERVICES = {
+
+    findAll: async (req, res) => {
+
+        const result = await DAO.findAll();
+
+        res.status(200).json(result);
+    },
 
 
-SERVICES.findAll = async (req, res) => {
+    findById: async (req, res) => {
 
-    const result = await DAO.findAll();
+        const id = req.params.id;
+        const result = await DAO.findById(id);
 
-    res.status(200).json(result);
-}
+        if (result !== null) {
+            return res.status(200).json(result);
+        }
+
+        res.status(404).json({
+            message: `Vehicle Data with ID ${id} not found.`
+        });
+    },
 
 
-SERVICES.findById = async (req, res) => {
+    findCreate: async (req, res) => {
 
-    const id = req.params.id;
-    const result = await DAO.findById(id);
+        const vehicleData = req.body;
+        const result = await DAO.create(vehicleData);
 
-    if( result !== null ){
-        return res.status(200).json(result);
+        res.status(201).json({
+            message: `Vehicle Data created successfully!`,
+            result: result
+        });
+    },
+
+    create: async (req, res) => {
+
+        const vehicleData = req.body;
+        const result = await DAO.create(vehicleData);
+
+        res.status(201).json({
+            message: "Vehicle Data created successfully.",
+            result: result
+        });
     }
-
-    res.status(404).json({
-        message: `Vehicle Data with ID ${id} not found.`
-    });
-}
-
-
-SERVICES.findCreate = async (req, res) => {
-
-    const vehicleData = req.body;
-    const result = await DAO.create(vehicleData);
-
-    res.status(201).json({
-        message: `Vehicle Data created successfully!`,
-        result: result
-    });
-}
+};
 
 module.exports = SERVICES;

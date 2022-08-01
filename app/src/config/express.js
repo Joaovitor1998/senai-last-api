@@ -7,9 +7,9 @@ require('dotenv').config();
 const { SECRET } = process.env;
 
 const isLoggedIn = require('../middleware/authMiddleware.js');
-const usersRouting = require('../routes/users'),
-    vehiclesRouting = require('../routes/vehicles'),
-    vehiclesDataRouting = require('../routes/vehiclesData');
+const usersRouting = require('../routes/user'),
+    vehiclesRouting = require('../routes/vehicle'),
+    vehiclesDataRouting = require('../routes/vehicleData');
 
 const corsOptions = {
     exposedHeaders: ['x-access-token']

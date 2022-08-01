@@ -1,40 +1,41 @@
 const DAO = require('../dao/vehicle');
 
-const INTERNAL_ERROR_MESSAGE = {message: ""};
+const INTERNAL_ERROR_MESSAGE = { message: "" };
 
-const SERVICES = {};
+const SERVICES = {
+
+    findAll: async (req, res) => {
+
+        const result = await DAO.findAll();
+
+        res.status(200).json(result);
+    },
 
 
-SERVICES.findAll = async (req, res) => {
+    findById: async (req, res) => {
 
-    const result = await DAO.findAll();
+        const id = req.params.id;
+        const result = await DAO.findById(id);
 
-    res.status(200).json(result);
-}
+        if (result !== null) {
+            return res.status(200).json(result);
+        }
+
+        res.status(404).json({
+            message: `Vehicle with ID ${id} not found.`
+        });
+    },
 
 
-SERVICES.findById = async (req, res) => {
+    create: async (req, res) => {
 
-    const id = req.params.id;
-    const result = await DAO.findById(id);
+        const vehicle = req.body;
+        const result = await DAO.create(vehicle);
 
-    if(result !== null) {
-        return res.status(200).json(result);
+        res.status(201).json(result);
+
     }
 
-    res.status(404).json({
-        message: `Vehicle with ID ${id} not found.`
-    });
-}
-
-
-SERVICES.create = async (req, res) => {
-
-    const vehicle = req.body;
-    const result = await DAO.create(vehicle);
-
-    res.status(201).json(result);
-    
-}
+};
 
 module.exports = SERVICES;
