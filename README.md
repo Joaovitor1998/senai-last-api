@@ -9,7 +9,7 @@ Firstly, clone this repo and then:
 ```bash
 npm install #Install all the dependecies
 
-ng serve #Run the serve
+npm start #Run the server
 ```
 
 ## Technologies
@@ -20,3 +20,4 @@ ng serve #Run the serve
 - Bcrypt
 - Jsonwebtoken
 - Dotenv
+- Nodemon
