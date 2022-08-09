@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Role = require('../models/role');
+const UserRoles = require('../models/userRole');
 
 const API = {};
 
@@ -49,9 +50,9 @@ API.signInWithUsername = (user) => {
 
 API.signup = async (user) => {
     const newUser = await User.create(user);
-    UserRoles.create({
-        tbUserId: newUser.id,
-        tbRoleId: 1 // USER
+    await UserRoles.create({
+        UserId: newUser.id,
+        RoleId: 2 // USER
     });
 }
 

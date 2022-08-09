@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const db = require("../config/database");
 
-module.exports = db.define("tb_user", {
+const User = db.define("User", {
     id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -37,5 +37,11 @@ module.exports = db.define("tb_user", {
         defaultValue: Sequelize.fn('NOW')
     }
 }, {
-    timestamps: false
+    timestamps: false,
+    freezeTableName: true,
+    tableName: 'tb_user'
 });
+
+
+
+module.exports = User;

@@ -11,11 +11,12 @@ const SERVICES = {
     signIn: async (req, res) => {
 
         const userLogin = req.body; // Username & Password
+        
         const user = await verifyUserByGivenType(userLogin.username, DAO);
 
         if (user !== null) {
 
-            bcrypt.compare(user.password, user.password, (error, result) => {
+            bcrypt.compare(userLogin.password, user.password, (error, result) => {
 
                 if (result) {
 
@@ -31,6 +32,8 @@ const SERVICES = {
 
             });
 
+        } else {
+            res.status(400).json("User does not exists!");
         }
     },
 
@@ -38,15 +41,17 @@ const SERVICES = {
     signUp: async (req, res) => {
 
         const user = req.body;
+        console.log(user)
 
-        bcrypt.hash(user.password, SALT_OR_ROUNDS, (error, result) => {
+        bcrypt.hash(user.password, 10, (error, result) => {
 
             user.password = result;
+            
             DAO.signup(user);
 
+            res.status(201).json("User created successfully!");
         });
 
-        res.status(201).json("User created successfully!");
     },
 
 

@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const db = require("../config/database");
 
-const Roles = db.define("tb_role", {
+const Role = db.define("Role", {
     id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -23,7 +23,10 @@ const Roles = db.define("tb_role", {
         allowNull: true
     }
 }, {
-    timestamps: false
+    timestamps: false,
+    freezeTableName: true,
+    tableName: 'tb_role'
 });
 
-module.exports = Roles;
+
+module.exports = Role;

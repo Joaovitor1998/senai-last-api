@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../config/database");
 
 
-module.exports = db.define("tb_vehicle_data", {
+const VehicleData = db.define("VehicleData", {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -51,5 +51,9 @@ module.exports = db.define("tb_vehicle_data", {
         allowNull: true,
     }
 }, {
-    timestamps: false
+    timestamps: false,
+    freezeTableName: true,
+    tableName: 'tb_vehicle_data'
 });
+
+module.exports = VehicleData;

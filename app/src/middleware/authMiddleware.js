@@ -9,7 +9,7 @@ function isLoggedIn(req, res, next) {
 
         const secret = req.app.get('secret');
         // GET ONLY THE TOKEN, REMOVING THE WORD 'BEARER' IN FRONT OF IT.
-        const userToken = token.split(" ")[1];
+        const userToken = bearerToken.split(" ")[1];
 
         jwt.verify(userToken, secret, (err, result) => {
 

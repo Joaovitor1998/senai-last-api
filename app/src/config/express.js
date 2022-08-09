@@ -15,7 +15,7 @@ const corsOptions = {
     exposedHeaders: ['x-access-token']
 };
 
-
+app.use(express.json());
 app.use(cors(corsOptions));
 app.set('secret', SECRET);
 

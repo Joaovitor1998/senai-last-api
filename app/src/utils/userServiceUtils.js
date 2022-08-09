@@ -12,8 +12,8 @@ const utils = {
     },
 
     generateToken: (user, secret, jwt) => {
-        const { id, username, email, tb_roles } = user.dataValues;
-        const roles = extractUserRoles(tb_roles);
+        const { id, username, email, Roles } = user.dataValues;
+        const roles = extractUserRoles(Roles);
     
         const jwtSignature = { id, username, email, roles };
         const expiration = { expiresIn: 86400 };
